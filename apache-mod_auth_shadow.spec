@@ -10,6 +10,7 @@ Release:	0.1
 License:	GPL
 Group:		Networking/Daemons
 Source0:	http://www.jdimedia.nl/igmar/mod_%{mod_name}/files/mod_%{orig_name}-%{version}.tar.gz
+# Source0-md5:	46164ccb94489415021a041daa8a3ded
 Patch0:		%{name}-path.patch
 URL:		http://www.jdimedia.nl/igmar/mod_%{mod_name}/
 BuildRequires:	%{apxs}
