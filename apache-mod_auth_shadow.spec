@@ -14,7 +14,6 @@ Patch0:		%{name}-path.patch
 URL:		http://www.jdimedia.nl/igmar/mod_%{mod_name}/
 BuildRequires:	%{apxs}
 BuildRequires:	apache-devel
-BuildRequires:	zlib-devel
 Requires(post,preun):	%{apxs}
 Requires:	apache
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
