@@ -36,7 +36,6 @@ Modu³ do apache: autoryzacja przez plik /etc/shadow
 %{__cc} -o validate validate.c -lcrypt
 %{apxs} -c mod_%{orig_name}.c -o mod_%{mod_name}.so -lz
 
-
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sbindir}}
