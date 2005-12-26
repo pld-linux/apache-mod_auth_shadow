@@ -12,14 +12,14 @@ Group:		Networking/Daemons
 Source0:	http://www.jdimedia.nl/igmar/mod_%{mod_name}/files/mod_%{orig_name}-%{version}.tar.gz
 # Source0-md5:	46164ccb94489415021a041daa8a3ded
 Patch0:		%{name}-path.patch
-URL:		http://www.jdimedia.nl/igmar/mod_%{mod_name}/
+URL:		http://www.jdimedia.nl/igmar/mod_auth-shadow/
 BuildRequires:	%{apxs}
-BuildRequires:	apache-devel
-Requires(post,preun):	%{apxs}
-Requires:	apache
+BuildRequires:	apache-devel >= 2.0
+Requires:	apache(modules-api) = %apache_modules_api
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_pkglibdir	%(%{apxs} -q LIBEXECDIR)
+%define		_pkglibdir	%(%{apxs} -q LIBEXECDIR 2>/dev/null)
+%define		_sysconfdir	%(%{apxs} -q SYSCONFDIR 2>/dev/null)
 
 %description
 Apache module: authenticating against a /etc/shadow file
@@ -29,7 +29,6 @@ Modu³ do apache: autoryzacja przez plik /etc/shadow
 
 %prep
 %setup -q -n mod_%{orig_name}-%{version}
-
 %patch0 -p1
 
 %build
@@ -38,23 +37,23 @@ Modu³ do apache: autoryzacja przez plik /etc/shadow
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sbindir}}
+install -d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sbindir},%{_sysconfdir}/httpd.conf}
 
 install mod_%{mod_name}.so $RPM_BUILD_ROOT%{_pkglibdir}
 install validate $RPM_BUILD_ROOT%{_sbindir}
+echo 'LoadModule auth_shadow_module modules/mod_auth_shadow.so' > \
+	$RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf/90_mod_%{mod_name}.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%{apxs} -e -a -n %{mod_name} %{_pkglibdir}/mod_%{mod_name}.so 1>&2
 if [ -f /var/lock/subsys/httpd ]; then
 	/etc/rc.d/init.d/httpd restart 1>&2
 fi
 
 %preun
 if [ "$1" = "0" ]; then
-	%{apxs} -e -A -n %{mod_name} %{_pkglibdir}/mod_%{mod_name}.so 1>&2
 	if [ -f /var/lock/subsys/httpd ]; then
 		/etc/rc.d/init.d/httpd restart 1>&2
 	fi
@@ -63,5 +62,6 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc CHANGES README
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf/*_mod_%{mod_name}.conf
 %attr(755,root,root) %{_pkglibdir}/*
 %attr(4755,root,root) %{_sbindir}/*
