@@ -27,9 +27,9 @@ mod_auth_shadow is an Apache module for authenticating users via an
 /etc/shadow file.
 
 When performing this task one encounters one fundamental difficulty:
-The /etc/shadow file is supposed to be read/writeable only by root.
+the /etc/shadow file is supposed to be read/writeable only by root.
 However, the webserver is supposed to run under a non-root user, such
-as "nobody".
+as "http".
 
 mod_auth_shadow addresses this difficulty by opening a pipe to an suid
 root program, validate, which does the actual validation. When there
@@ -37,7 +37,18 @@ is a failure, validate writes an error message to the system log, and
 waits three seconds before exiting.
 
 %description -l pl
-Modu³ do apache: autoryzacja przez plik /etc/shadow
+mod_auth_shadow to modu³ Apache'a do uwierzytelniania u¿ytkowników
+poprzez plik /etc/shadow.
+
+Przy wykonywaniu tego zadania jest jedna zasadnicza trudno¶æ: plik
+/etc/shadow mo¿e byæ odczytywany/zapisywany tylko przez roota. Jednak
+serwer WWW ma dzia³aæ z prawami u¿ytkownika innego ni¿ root, takiego
+jak "http".
+
+mod_auth_shadow obchodzi ten problem poprzez otwieranie potoku do
+programu z ustawionym atrybutem suid root - validate - wykonuj±cego
+w³a¶ciwe sprawdzanie has³a. W przypadku b³êdu validate zapisuje
+komunikat do loga systemowego i czeka trzy sekundy przed zakoñczeniem.
 
 %prep
 %setup -q -n mod_%{mod_name}-%{version}
@@ -78,4 +89,4 @@ fi
 %doc CHANGES INSTALL README
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf/*_mod_%{mod_name}.conf
 %attr(755,root,root) %{_pkglibdir}/*
-%attr(4755,root,root) %{_sbindir}/*
+%attr(4755,root,root) %{_sbindir}/validate
