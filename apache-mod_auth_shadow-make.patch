@@ -1,0 +1,11 @@
+--- mod_auth_shadow-2.1/makefile~	2005-09-26 20:57:57.000000000 +0300
++++ mod_auth_shadow-2.1/makefile	2005-12-26 20:17:48.000000000 +0200
+@@ -23,8 +23,6 @@
+ 
+ validate: validate.o
+ 	$(CC) validate.o -lcrypt -o validate
+-	chown root:root validate
+-	chmod +s validate
+ 
+ validate.o: validate.c validate.h
+ 	$(CC) -c validate.c
