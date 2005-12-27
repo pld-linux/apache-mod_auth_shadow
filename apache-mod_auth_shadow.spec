@@ -66,7 +66,7 @@ install -d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sbindir},%{_sysconfdir}/httpd.conf}
 
 install .libs/mod_%{mod_name}.so $RPM_BUILD_ROOT%{_pkglibdir}
 install validate $RPM_BUILD_ROOT%{_sbindir}
-echo 'LoadModule auth_shadow_module modules/mod_auth_shadow.so' > \
+echo 'LoadModule %{mod_name}_module modules/mod_%{mod_name}.so' > \
 	$RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf/90_mod_%{mod_name}.conf
 
 %clean
@@ -88,5 +88,5 @@ fi
 %defattr(644,root,root,755)
 %doc CHANGES INSTALL README
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf/*_mod_%{mod_name}.conf
-%attr(755,root,root) %{_pkglibdir}/*
+%attr(755,root,root) %{_pkglibdir}/*.so
 %attr(4755,root,root) %{_sbindir}/validate
