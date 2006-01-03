@@ -1,5 +1,3 @@
-# TODO
-# - mv SPECS/apache-mod_auth{-,_}shadow.spec,v
 %define		mod_name	auth_shadow
 %define 	apxs		/usr/sbin/apxs
 Summary:	Apache module: authenticating against a /etc/shadow file
