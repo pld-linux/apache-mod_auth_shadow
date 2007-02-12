@@ -1,7 +1,7 @@
 %define		mod_name	auth_shadow
 %define 	apxs		/usr/sbin/apxs
 Summary:	Apache module: authenticating against a /etc/shadow file
-Summary(pl.UTF-8):   Moduł do apache: autoryzacja przez plik /etc/shadow
+Summary(pl.UTF-8):	Moduł do apache: autoryzacja przez plik /etc/shadow
 Name:		apache-mod_%{mod_name}
 Version:	2.1
 Release:	0.1
