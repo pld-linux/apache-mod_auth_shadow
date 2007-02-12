@@ -1,7 +1,7 @@
 %define		mod_name	auth_shadow
 %define 	apxs		/usr/sbin/apxs
 Summary:	Apache module: authenticating against a /etc/shadow file
-Summary(pl):	Modu≥ do apache: autoryzacja przez plik /etc/shadow
+Summary(pl.UTF-8):   Modu≈Ç do apache: autoryzacja przez plik /etc/shadow
 Name:		apache-mod_%{mod_name}
 Version:	2.1
 Release:	0.1
@@ -35,19 +35,19 @@ root program, validate, which does the actual validation. When there
 is a failure, validate writes an error message to the system log, and
 waits three seconds before exiting.
 
-%description -l pl
-mod_auth_shadow to modu≥ Apache'a do uwierzytelniania uøytkownikÛw
+%description -l pl.UTF-8
+mod_auth_shadow to modu≈Ç Apache'a do uwierzytelniania u≈ºytkownik√≥w
 poprzez plik /etc/shadow.
 
-Przy wykonywaniu tego zadania jest jedna zasadnicza trudno∂Ê: plik
-/etc/shadow moøe byÊ odczytywany/zapisywany tylko przez roota. Jednak
-serwer WWW ma dzia≥aÊ z prawami uøytkownika innego niø root, takiego
+Przy wykonywaniu tego zadania jest jedna zasadnicza trudno≈õƒá: plik
+/etc/shadow mo≈ºe byƒá odczytywany/zapisywany tylko przez roota. Jednak
+serwer WWW ma dzia≈Çaƒá z prawami u≈ºytkownika innego ni≈º root, takiego
 jak "http".
 
 mod_auth_shadow obchodzi ten problem poprzez otwieranie potoku do
-programu z ustawionym atrybutem suid root - validate - wykonuj±cego
-w≥a∂ciwe sprawdzanie has≥a. W przypadku b≥Ídu validate zapisuje
-komunikat do loga systemowego i czeka trzy sekundy przed zakoÒczeniem.
+programu z ustawionym atrybutem suid root - validate - wykonujƒÖcego
+w≈Ça≈õciwe sprawdzanie has≈Ça. W przypadku b≈Çƒôdu validate zapisuje
+komunikat do loga systemowego i czeka trzy sekundy przed zako≈Ñczeniem.
 
 %prep
 %setup -q -n mod_%{mod_name}-%{version}
