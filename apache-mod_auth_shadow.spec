@@ -11,7 +11,7 @@ Source0:	http://dl.sourceforge.net/mod-auth-shadow/mod_auth_shadow-%{version}.ta
 # Source0-md5:	564f11a9d19ea546673644fdacb928e7
 Patch0:		%{name}-make.patch
 URL:		http://mod-auth-shadow.sourceforge.net/
-BuildRequires:	apache-apxs >= 2.0
+BuildRequires:	%{apxs}
 BuildRequires:	apache-devel >= 2.0
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires:	apache(modules-api) = %apache_modules_api
