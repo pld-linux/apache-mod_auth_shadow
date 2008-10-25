@@ -6,7 +6,7 @@ Name:		apache-mod_%{mod_name}
 Version:	2.1
 Release:	0.1
 License:	GPL
-Group:		Networking/Daemons
+Group:		Networking/Daemons/HTTP
 Source0:	http://dl.sourceforge.net/mod-auth-shadow/mod_auth_shadow-%{version}.tar.gz
 # Source0-md5:	564f11a9d19ea546673644fdacb928e7
 Patch0:		%{name}-make.patch
