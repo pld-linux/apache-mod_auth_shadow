@@ -3,12 +3,12 @@
 Summary:	Apache module: authenticating against a /etc/shadow file
 Summary(pl.UTF-8):	Moduł do apache: autoryzacja przez plik /etc/shadow
 Name:		apache-mod_%{mod_name}
-Version:	2.1
+Version:	2.3
 Release:	0.1
 License:	GPL
 Group:		Networking/Daemons/HTTP
 Source0:	http://dl.sourceforge.net/mod-auth-shadow/mod_auth_shadow-%{version}.tar.gz
-# Source0-md5:	564f11a9d19ea546673644fdacb928e7
+# Source0-md5:	3a7c4e053edd148a18d1eeee54cb73f7
 Patch0:		%{name}-make.patch
 URL:		http://mod-auth-shadow.sourceforge.net/
 BuildRequires:	%{apxs}
