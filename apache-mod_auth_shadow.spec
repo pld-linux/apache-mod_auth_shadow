@@ -50,7 +50,7 @@ właściwe sprawdzanie hasła. W przypadku błędu validate zapisuje
 komunikat do loga systemowego i czeka trzy sekundy przed zakończeniem.
 
 %prep
-%setup -q -n mod_%{mod_name}-%{version}
+%setup -q -n mod_%{mod_name}_%{version}
 %patch0 -p1
 
 %build
