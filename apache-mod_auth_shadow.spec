@@ -19,7 +19,7 @@ Obsoletes:	apache-mod_auth-shadow
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pkglibdir	%(%{apxs} -q LIBEXECDIR 2>/dev/null)
-%define		_sysconfdir	%(%{apxs} -q SYSCONFDIR 2>/dev/null)
+%define		_sysconfdir	%(%{apxs} -q SYSCONFDIR 2>/dev/null)/conf.d
 
 %description
 mod_auth_shadow is an Apache module for authenticating users via an
@@ -61,12 +61,13 @@ komunikat do loga systemowego i czeka trzy sekundy przed zakończeniem.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sbindir},%{_sysconfdir}/httpd.conf}
+install -d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sbindir},%{_sysconfdir}}
 
-install .libs/mod_%{mod_name}.so $RPM_BUILD_ROOT%{_pkglibdir}
-install validate $RPM_BUILD_ROOT%{_sbindir}
+install -p .libs/mod_%{mod_name}.so $RPM_BUILD_ROOT%{_pkglibdir}
+# XXX: too generic name
+install -p validate $RPM_BUILD_ROOT%{_sbindir}
 echo 'LoadModule %{mod_name}_module modules/mod_%{mod_name}.so' > \
-	$RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf/90_mod_%{mod_name}.conf
+	$RPM_BUILD_ROOT%{_sysconfdir}/90_mod_%{mod_name}.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -82,6 +83,6 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc CHANGES INSTALL README
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf/*_mod_%{mod_name}.conf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*_mod_%{mod_name}.conf
 %attr(755,root,root) %{_pkglibdir}/*.so
 %attr(4755,root,root) %{_sbindir}/validate
